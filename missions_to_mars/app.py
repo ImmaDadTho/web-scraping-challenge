@@ -4,6 +4,9 @@ import scrape_mars
 
 app = Flask(__name__)
 
+app.config["MONGO_URI"] = 'mongodb://localhost:27017/planet_mars_db'
+mongo = PyMongo(app)
+
 @app.route('/')
 def index():
     return "You have arrived to The Milky Way,\
@@ -11,9 +14,19 @@ def index():
 
 @app.route('/scrape')
 def scrape():
-    return "You reached the Planet Mars"
-    # mars_data = scrape_mars.scrape_all()
-    # print(mars_data)
+
+    marsGoDb = mongo.db.marsdata
+
+    #drop table if exists
+    mongo.db.marsdata.drop()
+
+    #activates the scrape mars py 
+    mars_data = scrape_mars.scrape_all()
+    
+    #loads the dictionary into mongo DB
+    marsGoDb.insert_one(mars_data)
+
+    return (f"You have reached the planet Mars\n" %{mars_data})
 
 if __name__ == "__main__":
     app.run()
