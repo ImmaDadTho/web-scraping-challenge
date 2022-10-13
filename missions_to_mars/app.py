@@ -26,7 +26,7 @@ def scrape():
     #loads the dictionary into mongo DB
     marsGoDb.insert_one(mars_data)
 
-    return "You have reached the planet Mars\n", mars_data
+    return mars_data,  "You have reached the planet Mars"
 
 if __name__ == "__main__":
     app.run()
