@@ -3,10 +3,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup as soup
 import requests
 from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service
-# driver = webdriver.Chrome(ChromeDriverManager().install())
-# s = Service('C:/Users/.../chromedriver.exe')
-# driver = webdriver.Chrome(service=s)
+import datetime as dt
 
 # scrape all function
 def scrape_all():
@@ -21,7 +18,8 @@ def scrape_all():
         'newsParagraph': news_paragraph,
         'MarsFeaturedImage': scrape_feature_pic(browser),
         'MarsVSEarth':scrape_facts(browser),
-        'MarsHemispheres':scrape_hemis(browser)
+        'MarsHemispheres':scrape_hemis(browser),
+        'Current_As_Of':dt.datetime.now()
     }
 
     browser.quit()
@@ -69,6 +67,7 @@ def scrape_feature_pic(browser):
     featured_image_url = f'https://spaceimages-mars.com/{image_url}'
 
     return featured_image_url
+
 # scrape the facts page 
 def scrape_facts(browser):
     marsfactsurl = 'https://galaxyfacts-mars.com/'
@@ -91,6 +90,7 @@ def scrape_facts(browser):
     facts += str(marsVSearth)
 
     return facts
+
 #scrape hemispheres page 
 def scrape_hemis(browser):
     hemispheresurl = 'https://marshemispheres.com/'
@@ -103,14 +103,14 @@ def scrape_hemis(browser):
     hemihtml = browser.find_by_css('a.product-item img')
 
     #loop though the links, click on link, find the sample anchor, return the href
-    for i in range(len(hemihtml)):
+    for i in range(4):
         #hemisphere dictionary
         hemisphereDict = {}
         
         #find elements on each loop 
         browser.find_by_css('a.product-item img')[i].click()
         
-        #find the sample image anchor
+        #find the sample image anchor tag
         sample = browser.find_by_text('Sample').first
         hemisphereDict['img_url'] = sample['href']
         
