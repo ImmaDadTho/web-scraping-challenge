@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, redirect, url_for
 from flask_pymongo import PyMongo
 import scrape_mars
 
@@ -9,8 +9,10 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def index():
-    return "You have arrived to The Milky Way,\
-    please make your way to the red planet we call Mars!"
+    mars_data = mongo.db.marsdata.find_one()
+
+    return render_template("index.html", mars = mars_data)
+
 
 @app.route('/scrape')
 def scrape():
@@ -22,11 +24,13 @@ def scrape():
 
     #activates the scrape mars py 
     mars_data = scrape_mars.scrape_all()
-    
+
     #loads the dictionary into mongo DB
     marsGoDb.insert_one(mars_data)
 
-    return mars_data
+    # return mars_data
+
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run()

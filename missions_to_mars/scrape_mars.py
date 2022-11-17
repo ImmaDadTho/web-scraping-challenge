@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup as soup
 import requests
 from selenium import webdriver
 import datetime as dt
+import time
 
 # scrape all function
 def scrape_all():
@@ -109,7 +110,7 @@ def scrape_hemis(browser):
         
         #find elements on each loop 
         browser.find_by_css('a.product-item img')[i].click()
-        
+        time.sleep(1)
         #find the sample image anchor tag
         sample = browser.find_by_text('Sample').first
         hemisphereDict['img_url'] = sample['href']
@@ -122,6 +123,7 @@ def scrape_hemis(browser):
         
         #navigate backwards
         browser.back()
+        time.sleep(1)
 
     return hemispheresImages
 
