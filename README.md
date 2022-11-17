@@ -2,7 +2,7 @@
 
 In this activity I build a web application that scrapes various websites for data related to the Mission to Mars and displays the information in a single HTML page, and using the application creates a database in MongoDB and stores the information that was scraped in a table. There are two parts to this ativity the first part is `scraping` the second part is `MongoDB and Flask application`.
 
-I have also created another repo that will just have the Jupyter notebook containing the scraping code used and some screenshots of the final application.
+I have also created another repo to fulfill part 3 of the assignment that will just have the Jupyter notebook containing the scraping code used and some screenshots of the final application.
 https://github.com/ImmaDadTho/MarsWSsubmission
 
 # Scraping
