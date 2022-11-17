@@ -14,6 +14,9 @@ I started by creating a jupyter notebook file to scrape and analyze different in
 * Use splinter to navigate the site and find the image URL for the current Featured Mars Image.
 * Visit the Mars Facts webpage and use Pandas to scrape the table containing facts about the planet.
   * Use Pandas to convert the data to a HTML table string.
+  
+![Alt text](missions_to_mars/screenshots/jupyterFactspythontoHtml.jpg?raw=true "Title")
+
 * Visit the astrogeology site to obtain high-resolution images for each hemisphere of Mars.
   * Use splinter to click each of the links to the hemispheres in order to find the image URL to the full-resolution image.
   
